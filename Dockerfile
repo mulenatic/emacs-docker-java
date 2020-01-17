@@ -1,7 +1,8 @@
 # Use the newest emacs version from silex as base
-FROM mulenatic/emacs-docker:v2.1.2
+FROM mulenatic/emacs-docker:v2.1.3
 RUN sudo apt-get update; sudo apt-get install -y default-jdk maven; sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*;
-COPY ["emacs.el", "/home/docker/.emacs.el"]
+COPY ["emacs.el", "/home/docker/emacs-addons.el"]
+RUN cat /home/docker/emacs-addons.el >> /home/docker/.emacs.el
 USER docker
 RUN echo '\n(depends-on "yasnippet")\n(depends-on "lsp-mode")\n(depends-on "hydra")\n(depends-on "company-lsp")\n(depends-on "lsp-ui")\n(depends-on "lsp-java")\n(depends-on "dap-mode")\n(depends-on "dap-java")\n(depends-on "helm-lsp")\n(depends-on "lsp-treemacs")\n(depends-on "treemacs-projectile")\n(depends-on "treemacs-magit")\n(depends-on "restclient")\n(depends-on "company-restclient")' >> /home/docker/.emacs.d/Cask; \
 	cd /home/docker/.emacs.d/; cask install; \

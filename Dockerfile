@@ -1,5 +1,5 @@
 # Use the newest emacs version from silex as base
-FROM mulenatic/emacs-docker:v2.4.0
+FROM mulenatic/emacs-docker:v2.4.1
 RUN sudo apt-get update; sudo apt-get install -y default-jdk maven gradle; sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*;
 COPY ["emacs.el", "/home/docker/emacs-addons.el"]
 RUN cat /home/docker/emacs-addons.el >> /home/docker/.emacs.el
